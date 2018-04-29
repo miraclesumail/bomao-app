@@ -1,0 +1,13 @@
+<!-- Generated template for the MenumodalComponent component -->
+<div style="padding-top:10px;" class="modal">
+     <p style="margin-bottom:10px">选择在号码下方显示相应的数据:</p>
+     <div style="margin-left:20px;width:240px;margin-bottom:10px">
+          <div style="float:left;width:120px;margin-bottom:10px" *ngFor="let item of choice">
+               <span class="choose" style="display:inline-block" (click)="toggleChoose(item)"> </span> <span>{{item}}</span>
+          </div>
+     </div>
+     <div style="position:absolute;bottom:0;width:100%;display:flex;border-top:1px solid #f0f0f0">
+         <div style="flex:1;height:30px;line-height:30px;text-align:center">取消</div>
+         <div style="flex:1;height:30px;line-height:30px;text-align:center">确定</div>
+     </div>
+</div>

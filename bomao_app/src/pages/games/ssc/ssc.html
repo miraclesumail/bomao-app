@@ -1,0 +1,127 @@
+<!--
+  Generated template for the SscPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>
+       <div style="position:relative;z-index:1300" #methodName (click)="common.toggle()">{{common.method}} {{common.smallMethod}}</div>
+
+    </ion-title>
+
+    <div class="toggle-menu" (click)="$event.stopPropagation();common.open = !common.open"></div>
+  </ion-navbar>
+
+</ion-header>
+<rightmenu [menus]="menus" (switch)="change($event)" [open]="common.open"></rightmenu>
+
+<gamemenu> </gamemenu>
+<menumodal [menus]="showTip" (toggle)="changeMenu($event)"></menumodal>
+
+<ion-content >
+    <div class="body-bg"></div>
+  <p class="l-info" text-center>距23058期截止 09:56</p>
+
+  <div class="table" id="touch" [ngStyle]="{'height':(80 + high) + 'px'}" style="overflow:hidden;transition:all .5s ease-in;">
+    <div class="thead clearfix">
+      <div class="tr clearfix">
+        <div class="th" style='width:22.6%'>期次</div>
+        <div class="th" style='width:24.6%'>开奖号码</div>
+        <div class="th" style='width:17.5%'>十位</div>
+        <div class="th" style='width:17.5%'>个位</div>
+        <div class="th" style='width:17.5%'>后三</div>
+      </div>
+
+      <div class="tbody clearfix">
+        <div class="tr clearfix" *ngFor="let item of list">
+            <div style='width:22.6%' class="td">{{item.number}}期</div>
+            <div style='width:24.6%' class="td color-dager">{{item.balls}}</div>
+            <div style='width:17.5%' class="td">{{item.shiwei}}</div>
+            <div style='width:17.5%' class="td">{{item.gewei}}</div>
+            <div style='width:17.5%' class="td">{{item.housan}}</div>
+        </div>
+
+
+      </div>
+    </div>
+
+
+
+  </div>
+    <div *ngIf="!over" style="" id="qq">load</div>
+
+    <div class="bet-box clearfix">
+        <div *ngIf="common.smallMethod == '乱选和值'" class="l-game l-hezhi" style="height:230px">
+             
+                <div class="ball-list hezhi">
+                    <ul *ngFor="let item of common.ballData;let i = index">
+                      <li *ngFor="let todo of item;let j = index" [class.current]="todo == 1">{{7*i + j}}</li>
+                    </ul>
+
+                     <div class="btn-list">
+                       <a href="javascript:;" *ngFor="let detail of common.singleBtn;let j = index" [class.current]="detail.flag" (click)="util.changeActive(null,j,detail.name)">{{detail.name}} <span></span></a>
+
+                    </div>
+            
+                </div> 
+                
+               
+               
+                
+        </div>
+        <div *ngIf="common.smallMethod != '乱选和值'">
+            <div class="l-game" *ngFor="let data of common.ballData;let ii = index" >
+                <div class="l">
+                    <p><span></span>{{data.key}}</p>
+                    <p style="margin-top:18px"><span></span>遗漏</p>
+                </div>
+
+                <div class="r">
+                    <div class="ball-list">
+                        <ul>
+                            <li *ngFor="let item of data.value.slice(0,5);let i = index" [class.current]="item == 1"  (click)="util.changeToggle(ii,i)">{{i}}</li>
+                        </ul>
+
+                        <ul class="yilou">
+                            <li *ngFor ="let detail of util.yilou[data.key].slice(0,5)">{{detail}}</li>
+                        </ul>
+                        <ul>
+                            <li *ngFor="let item of data.value.slice(-5);let i = index" [class.current]="item == 1" (click)="util.changeToggle(ii,i+5)">{{qqq(i)}}</li>
+                        </ul>
+                        <ul class="yilou">
+                            <li *ngFor ="let detail of util.yilou[data.key].slice(-5)">{{detail}}</li>
+                        </ul>
+                        <div class="btn-list">
+                            <a href="javascript:;" *ngFor="let detail of common.btn[ii];let j = index" [class.current]="detail.flag" (click)="util.changeActive(ii,j,detail.name)">{{detail.name}} <span></span></a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</ion-content>
+
+<ion-footer class="ion-footer" style="position:fixed;height:50px;bottom:0;display:flex;" >
+    <tab-yuan ></tab-yuan>
+    <div class="clear" ></div>
+    <div class="tab-mode" (click)="common.openTab()" style="z-index:10">
+        <div>{{common.tabYuan}}</div><div>模式</div>
+    </div>
+    <div id="bet-statistic" [class.can] = "common.count > 0" (click)="addToCart(methodName)">
+        <div style="width:30px;padding-left:20px;line-height:50px;font-size:18px">+</div>
+        <div style="padding-left:10px">
+            <div style="height:25px;line-height:25px">已选{{common.count}}注</div>
+            <div style="height:25px;line-height:25px">共{{common.betPrice}}元</div>
+        </div>
+    </div>
+    <div class="basket" (click)="goToBasket()">
+        <div class="bet-number" *ngIf="common.cartNumber"> {{common.cartNumber}}</div>
+
+    </div>
+</ion-footer>

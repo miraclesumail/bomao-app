@@ -1,0 +1,63 @@
+ion-navbar.toolbar{
+  height: 47px;
+  box-sizing: border-box;
+  //background-color: #F1C901;
+}
+.toolbar-background-ios,.toolbar-background-md{
+  background-color: #F1C901;
+}
+.header-ios .toolbar-background-ios, .footer-ios .toolbar-background-ios,.toolbar-background-md{
+  border:none;
+}
+.toolbar-md{
+  min-height: 47px;
+}
+.tabs-md .tab-button{
+  min-height: 60px;
+}
+
+.color-dager{
+  color: #F6374E;
+}
+a{
+  text-decoration: none;
+}
+h1,h2,h3,h4,h5,h6,ul,li,p{
+  margin: 0;
+  padding: 0;
+}
+ul,li{
+  list-style: none;
+}
+
+.cl:after, .clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden
+}
+
+.cl, .clearfix {
+  zoom: 1
+}
+.back-button.show-back-button{
+  color: #FFFFFF;
+}
+.content-ios,.content-md{
+  background-color: #f1f1f1;
+}
+
+// 阴影
+.body-bg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 100;
+  display: none;
+}
+
+//modal

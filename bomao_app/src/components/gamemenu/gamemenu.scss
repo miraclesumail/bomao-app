@@ -1,0 +1,11 @@
+gamemenu {
+  div.active{color: black}
+  .choose-game{display:flex;flex-direction:column;width:100%;position:fixed;top:48px;background:#f0f0f0;padding: 10px;
+    z-index:1000;transition:.5s;transform-origin:center top}
+
+  .big-method li{margin:0 4% 10px 0;width:21%;height:30px;display:inline-block;border:1px solid lightblue}
+
+  .big-method li:nth-of-type(4n){margin-right: 0}
+
+  div.small-method{display:inline-block;width:30%;margin-right:2%;border-radius:5px;background:#ffffff;text-align:center;padding:3px;margin-bottom:10px}
+}

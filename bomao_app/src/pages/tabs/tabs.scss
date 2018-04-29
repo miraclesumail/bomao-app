@@ -1,0 +1,76 @@
+.tabbar.show-tabbar{
+  height: 60px;
+}
+.tabs-ios .tab-button:hover:not(.disable-hover), .tabs-ios .tab-button[aria-selected=true]{
+  color: #E96A04;
+  font-size: 12px;
+  transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+  transform: scale3d(1.16667, 1.16667, 1);
+}
+
+ion-app, ion-nav, ion-tab, ion-tabs, .app-root{
+  background-color: #ffffff;
+}
+#tab-t0-0{
+  background-image: url("../assets/tabs/tab-home-icon.png");
+  background-size: auto 20px;
+}
+#tab-t0-0[aria-selected="true"]{
+  color: #E96A04;
+  background-image: url("../assets/tabs/tab-home-icon-current.png");
+  //background-size: auto 22px;
+  //background-position: center 12px;
+}
+#tab-t0-1{
+  background-image: url("../assets/tabs/tab-football-icon.png");
+  background-size: auto 23.5px;
+}
+#tab-t0-1[aria-selected="true"]{
+  color: #E96A04;
+  background-image: url("../assets/tabs/tab-football-icon-current.png");
+  //background-size: auto 25.5px;
+  //background-position: center 12px;
+}
+#tab-t0-2{
+  background-image: url("../assets/tabs/tab-group-icon.png");
+  background-size: auto 21px;
+}
+#tab-t0-2[aria-selected="true"]{
+  color: #E96A04;
+  background-image: url("../assets/tabs/tab-group-icon-current.png");
+  //background-size: auto 23px;
+  //background-position: center 12px;
+}
+#tab-t0-3{
+  background-image: url("../assets/tabs/tab-user-icon.png");
+  background-size: auto 20px;
+}
+#tab-t0-3[aria-selected="true"]{
+  color: #E96A04;
+  background-image: url("../assets/tabs/tab-user-icon-current.png");
+  //background-size: auto 22px;
+  //background-position: center 12px;
+}
+.tabbar .tab-button{
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center 13px;
+  transition: all .3s;
+}
+.tabs-md .tab-button[aria-selected=true] .tab-button-text{
+  transform: none;
+}
+.tabs-md .tab-button[aria-selected=true]{
+  transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+  transform: scale3d(1.16667, 1.16667, 1);
+}
+
+
+.tabs-ios[tabsLayout=icon-hide] .tab-button .tab-button-text, .tabs-ios .tab-button.has-title-only .tab-button-text{
+  margin-top: 33px;
+  font-size: 12px;
+}
+.tabs-md .tab-button-text{
+  margin-top: 30px;
+  font-size: 12px;
+}

@@ -1,0 +1,7 @@
+menumodal {
+   .modal{position: fixed;left:-300px;top:200px;width: 300px;height: 150px;background: #f5d300;z-index: 3;transition: .8s}
+  
+   .modal.active{left:calc(50% - 150px)}
+
+   span.choose{width:20px;height: 20px;border: 1px solid yellow}
+}
