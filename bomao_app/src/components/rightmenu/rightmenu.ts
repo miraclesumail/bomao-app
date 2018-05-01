@@ -1,4 +1,5 @@
 import { Component,Input,Output,EventEmitter } from '@angular/core';
+import * as $ from 'jquery'
 
 /**
  * Generated class for the RightmenuComponent component.
@@ -21,5 +22,6 @@ export class RightmenuComponent {
 
   switch(title){
     this.change.emit(title)
+    
   }
 }

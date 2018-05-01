@@ -19,7 +19,7 @@
 <rightmenu [menus]="menus" (switch)="change($event)" [open]="common.open"></rightmenu>
 
 <gamemenu> </gamemenu>
-<menumodal [menus]="showTip" (toggle)="changeMenu($event)"></menumodal>
+<menumodal [hasChoosen]="haveChoosen" (toggle)="changeMenu($event)"></menumodal>
 
 <ion-content >
     <div class="body-bg"></div>
@@ -52,6 +52,7 @@
 
   </div>
     <div *ngIf="!over" style="" id="qq">load</div>
+    <div class="shakePhone" (click)="util.randomChoose()"></div>  
 
     <div class="bet-box clearfix">
         <div *ngIf="common.smallMethod == '乱选和值'" class="l-game l-hezhi" style="height:230px">
@@ -77,6 +78,7 @@
                 <div class="l">
                     <p><span></span>{{data.key}}</p>
                     <p style="margin-top:18px"><span></span>遗漏</p>
+                    <p *ngIf="check('30期冷热')" style="margin-top:18px"><span></span>冷热</p>
                 </div>
 
                 <div class="r">
@@ -85,15 +87,25 @@
                             <li *ngFor="let item of data.value.slice(0,5);let i = index" [class.current]="item == 1"  (click)="util.changeToggle(ii,i)">{{i}}</li>
                         </ul>
 
-                        <ul class="yilou">
+                        <ul class="yilou statistic">
                             <li *ngFor ="let detail of util.yilou[data.key].slice(0,5)">{{detail}}</li>
                         </ul>
+                        
+                        <ul class="lengre statistic" *ngIf="check('30期冷热')">
+                            <li *ngFor ="let detail of util.lengre[data.key].slice(0,5)">{{detail}}</li>
+                        </ul>
+
                         <ul>
                             <li *ngFor="let item of data.value.slice(-5);let i = index" [class.current]="item == 1" (click)="util.changeToggle(ii,i+5)">{{qqq(i)}}</li>
                         </ul>
-                        <ul class="yilou">
+                        <ul class="yilou statistic">
                             <li *ngFor ="let detail of util.yilou[data.key].slice(-5)">{{detail}}</li>
                         </ul>
+
+                        <ul class="lengre statistic" *ngIf="check('30期冷热')">
+                            <li *ngFor ="let detail of util.lengre[data.key].slice(-5)">{{detail}}</li>
+                        </ul>
+
                         <div class="btn-list">
                             <a href="javascript:;" *ngFor="let detail of common.btn[ii];let j = index" [class.current]="detail.flag" (click)="util.changeActive(ii,j,detail.name)">{{detail.name}} <span></span></a>
 

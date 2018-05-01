@@ -21,7 +21,10 @@ import { ToolsProvider } from '../providers/tools/tools';
 
 //动画模块
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UtilProvider } from '../providers/util/util';
+import { BasketDataProvider } from '../providers/basket-data/basket-data';
+import { Vibration } from '@ionic-native/vibration';
 
 
 @NgModule({
@@ -54,10 +57,13 @@ import { UtilProvider } from '../providers/util/util';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    Vibration,
     CommonProvider,
     HttpClientProvider,
     ToolsProvider,
-    UtilProvider
+    UtilProvider,
+    BasketDataProvider
+    
   ]
 })
 export class AppModule {}

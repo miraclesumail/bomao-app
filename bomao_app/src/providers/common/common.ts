@@ -17,7 +17,8 @@ let _ = new observe();
 export class CommonProvider {
   pid = new Subject();
   open:boolean = false
-
+  //倒计时
+  timer:any;
   //用于存储现在游戏所有的玩法
   gameMethodConfig:Array<any> = [];
   data:any;
@@ -42,9 +43,18 @@ export class CommonProvider {
   btn:any[];
   singleBtn:Array<any>;
 
+  countTime:any = {
+    'total': '',
+    'days': '',
+    'hours': '',
+    'minutes': '',
+    'seconds': ''
+  }
+
 
   constructor(public tools:ToolsProvider, public http:HttpClientProvider, public events:Events) {
     console.log('Hello CommonProvider Provider');
+    this.produce()
     this.pid.subscribe((val) => {
         this.initData(val);
     })
@@ -126,4 +136,35 @@ export class CommonProvider {
         this.tabVisible = 'visible'
     }
 
+    produce(){
+      this.countDown(Math.floor(Math.random()*30)*1000)
+      
+    }
+
+    countDown(time){
+        this.timer = setInterval(()=> {
+        if(time <1000){
+            clearInterval(this.timer)
+            //this.global.showToast('进入新一期开奖',2000)
+            this.produce()
+        } 
+        this.countTime = this.getTimeRemaining(time)
+        time -= 1000
+        },1000)
+    }
+
+    getTimeRemaining(t) {
+    let seconds = Math.floor((t / 1000) % 60);
+    let minutes = Math.floor((t / 1000 / 60) % 60);
+    let hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+    let days = Math.floor(t / (1000 * 60 * 60 * 24));
+
+    return {
+      'total': t,
+      'days': days,
+      'hours': ('0' + hours).slice(-2),
+      'minutes': ('0' + minutes).slice(-2),
+      'seconds': ('0' + seconds).slice(-2)
+    };
+  }
 }

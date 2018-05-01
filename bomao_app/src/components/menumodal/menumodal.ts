@@ -11,12 +11,12 @@ import { Component,Input,Output,EventEmitter } from '@angular/core';
   templateUrl: 'menumodal.html'
 })
 export class MenumodalComponent {
-  @Input('menus')choice:any
+  @Input('hasChoosen')hasChoosen:any[];
   @Output('toggle') change: EventEmitter<any> = new EventEmitter<any>();
 
   text: string
 
-  //choice:string[] = ['当前遗漏', '30期冷热', '平均遗漏', '最大遗漏']
+  choice:string[] = ['当前遗漏', '30期冷热', '平均遗漏', '最大遗漏']
 
   constructor() {
     console.log('Hello MenumodalComponent Component');
@@ -25,5 +25,9 @@ export class MenumodalComponent {
 
   toggleChoose(choice){
     this.change.emit(choice)
+  }
+
+  isActive(item){
+    return this.hasChoosen.indexOf(item) > -1
   }
 }

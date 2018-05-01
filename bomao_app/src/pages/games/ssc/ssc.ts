@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { CommonProvider } from "../../../providers/common/common";
 import { Effect } from '../../../baseComponent'
+import { BasketDataProvider } from '../../../providers/basket-data/basket-data'
+
 import { GamemenuComponent } from '../../../components/gamemenu/gamemenu'
 import { MenumodalComponent } from '../../../components/menumodal/menumodal'
 import { UtilProvider } from '../../../providers/util/util'
@@ -22,8 +24,8 @@ import * as Hammer from 'hammerjs';
   providers:[GamemenuComponent]
 })
 export class SscPage extends Effect{
-    showTip:any = ['当前遗漏', '30期冷热', '平均遗漏', '最大遗漏']
-    haveChoosen:any = ['当前遗漏']
+    //showTip:any = ['当前遗漏', '30期冷热', '平均遗漏', '最大遗漏']
+    haveChoosen:any[] = ['当前遗漏']
 
     record: any = [
         {number: 23057, balls: '12345', shiwei: '大单', gewei: '小双', housan: '组六'},
@@ -41,6 +43,7 @@ export class SscPage extends Effect{
     //助手菜单
     menus:any =  ['走势图','近期开奖','号码统计','玩法说明']
 
+    
 
     list: any = []
 
@@ -51,8 +54,12 @@ export class SscPage extends Effect{
     high:number = 0
 
 
-    constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public common:CommonProvider, public gamemenu:GamemenuComponent, public util:UtilProvider) {
+    constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, 
+    public common:CommonProvider, public gamemenu:GamemenuComponent, public util:UtilProvider,public basket:BasketDataProvider) {
         super(common,gamemenu)
+        this.util.shakePhone(this.util.randomChoose)
+
+
         this.list = this.record.slice(0, 2)
         this.over = this.record.length > 2 ? false:true
 
@@ -117,7 +124,7 @@ export class SscPage extends Effect{
         console.log(dom.innerText)
         if(this.common.count == 0){return}
         // 把数据放进购彩蓝
-        //this.basket.addBetData(dom.innerText)
+        this.basket.addBetData(dom.innerText)
         $('<div id="ball"></div>').appendTo($('#bet-statistic'));
         this.move()
         this.util.resetData()
@@ -128,18 +135,39 @@ export class SscPage extends Effect{
         return number + 5
     }
 
+    goToBasket(){
+      if(this.common.cartNumber > 0 )
+       this.navCtrl.push('BasketPage')
+    }
+
     change(val){
         console.log(val)
         if(val == '走势图')
            this.navCtrl.push('GameTrendPage')
 
         if(val == '号码统计'){
+            if($('.modal').hasClass('active')){
+                $('.body-bg').fadeOut(1000)
+            }else{
+                $('.body-bg').fadeIn(1000)
+            }
             $('.modal').toggleClass('active')
+
         }
            
    }
 
-   changeMenu(){
-       
+   changeMenu(val){
+        if(this.haveChoosen.indexOf(val) > -1){
+             let index = this.haveChoosen.indexOf(val)
+             this.haveChoosen.splice(index,1)
+        }else{
+             this.haveChoosen.push(val)
+             // 判断是否冷热  this.util.fetch('lengre')
+        }
+   }
+
+   check(choice){
+       return this.haveChoosen.indexOf(choice) > -1
    }
 }

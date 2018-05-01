@@ -18,6 +18,8 @@ export class Effect{
             if(self.common.visible = 'visable'){
                 console.log('fff');self.gamemenu.toggle()
             }
+
+            
         });
         //this.addDynamicComponent()
     }
