@@ -16,6 +16,8 @@ let _ = new observe();
 @Injectable()
 export class CommonProvider {
   pid = new Subject();
+
+  bonus:number;
   open:boolean = false
   //倒计时
   timer:any;
@@ -25,6 +27,11 @@ export class CommonProvider {
   ballData:any = [];
   small:any;
   method:any;
+
+  //xiao wan fa
+  smallKind:any;
+
+  //小玩法名称
   smallMethod:string;
   bigIndex:any;
 
@@ -63,20 +70,32 @@ export class CommonProvider {
     ],true)
 
       this.events.subscribe('changeYuan',(val) => {
-          let percent = val == '元' ? 1 : this.tabYuan == '角' ? 0.1 : 0.01
+          console.log('wefwewf')
+          let origin = this.tabYuan == '元' ? 1 : this.tabYuan == '角' ? 0.1 : 0.01
+          let percent = val == '元' ? 1 : val == '角' ? 0.1 : 0.01
           this.betPrice = this.count*2*percent
+          console.log(origin)
+          console.log(percent)
+          this.bonus *= percent/origin
+          this.tabYuan = val
+
       })
   }
 
 
     async initData(name){
-        console.log('wcnm')
         this.data = (await this.http.fetchData(name)).list;
 
 
         this.gameMethodConfig = this.data;
 
         this.small = this.gameMethodConfig[0].children;
+        this.smallKind = this.gameMethodConfig[0].children[0].children[0]
+
+        console.log(this.smallKind)
+        let percent = this.tabYuan == '元' ? 1 : this.tabYuan == '角' ? 0.1 : 0.01
+        this.bonus = this.smallKind.bonus*percent
+
         if(this.small.length)
             this.ballData = this.tools.copy(this.gameMethodConfig[0].children[0].children[0].bet_numberArrObj, true)
         //this.ballData = arr
@@ -110,7 +129,23 @@ export class CommonProvider {
 
         this.method = this.gameMethodConfig[index].name
 
-        this.small = this.gameMethodConfig[0].children
+        //console.log(this.gameMethodConfig[index].children[index2])
+        this.small = this.gameMethodConfig[index].children
+        console.log(this.small)
+        let temp;
+        this.small.forEach((ele,index) => {
+            //temp = ele.children.filter(item => item.name == name)[0]
+
+            ele.children.forEach(item => {
+                if(item.name == name)
+                   temp = item
+            })
+        })
+        console.log(temp)
+        this.smallKind = temp
+        console.log(this.smallKind)
+        // let percent = this.tabYuan == '元' ? 1 : this.tabYuan == '角' ? 0.1 : 0.01
+        // this.bonus = this.smallKind.bonus*percent
         this.smallMethod = name
     }
 

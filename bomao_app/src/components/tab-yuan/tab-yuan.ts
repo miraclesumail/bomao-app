@@ -36,7 +36,7 @@ export class TabYuanComponent {
     }
 
     changeMode(name){
-        this.common.tabYuan = name
+        //this.common.tabYuan = name
         this.events.publish('changeYuan', name);
         this.common.tabVisible = 'invisable'
     }
